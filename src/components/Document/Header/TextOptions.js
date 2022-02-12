@@ -10,8 +10,8 @@ import React, {useState, useRef} from 'react';
 
 export default function TextOptions(props) {
 
-    const changeFont = () => {
-        
+    const changeFont = (value) => {
+        props.setTextStyles({ ...props.textStyles, font: props.textStyles.font })
     }
 
     return (
@@ -19,7 +19,7 @@ export default function TextOptions(props) {
             <button onClick={() => props.setTextStyles({ ...props.textStyles, bold: !props.textStyles.bold })}> <b>B</b> </button>
             <button onClick={() => props.setTextStyles({ ...props.textStyles, italicize: !props.textStyles.italicize })}> <i>I</i> </button>
             <button onClick={() => props.setTextStyles({ ...props.textStyles, underline: !props.textStyles.underline })}> <u>U</u> </button>
-            <select className='dropDown' onchange='changeFont()'>
+            <select className='dropDown' onchange={changeFont(value)}>
                 <option value="Calibri">Calibri</option>
                 <option value="Times New Roman">Times New Roman</option>
                 <option value="Arial">Arial</option>
