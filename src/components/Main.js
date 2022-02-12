@@ -7,12 +7,12 @@ import './Main.scss';
 
 export default function Main() {
 
-    const [onDocumentPage, setOnDocumentPage] = useState(false);
+    const [onDocumentPage, setOnDocumentPage] = useState(true);
 
     return (
         <div className="main">
             {
-                onDocumentPage ? <FileLoad /> : <Document />
+                <Document />
             }
         </div>
     )
