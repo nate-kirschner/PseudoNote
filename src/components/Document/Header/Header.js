@@ -2,16 +2,18 @@ import './Header.scss';
 import CodeOptions from './CodeOptions.js';
 import TextOptions from './TextOptions.js';
 import { useState } from 'react/cjs/react.development';
-
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap');
+</style>
 
 
 export default function Header(props) {
 
     const [mode, setMode] = useState('start')
-
+    console.log(mode)
     const optionView = () => {
         if(mode == 'start') {
-            return <div/>
+            return <div className='start'/>
         } else if (mode == 'text') {
             return <TextOptions setTextStyles={props.setTextStyles} textStyles={props.textStyles}/>    
         } else if (mode == 'code') {
@@ -21,9 +23,8 @@ export default function Header(props) {
 
     return (
         <div className="header">
-            <h3 className='title'> PsuedoNote </h3>
-            <button className='textButton' onClick={() => setMode("text")}> Text </button>
-            <button className="codeButton" onClick={() => setMode("code")}> Code </button> 
+            <div className='textButton' onClick={() => setMode("text")}> Text </div>
+            <div className="codeButton" onClick={() => setMode("code")}> Code </div> 
             {
                 optionView()
             }

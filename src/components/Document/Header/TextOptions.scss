@@ -1,18 +1,79 @@
+@import '../../../App.scss';
+
 .textOptions {
-    grid-row-start: 3;
-    grid-row-end: 4;
+    grid-row-start: 2;
+    grid-row-end: 3;
     grid-column-start: 1;
-    grid-column-end: 4;
+    grid-column-end: 5;
     height: 100%;
-    margin: 0;
-    //display: flex;
-    border: 1px solid black;
+    margin: 0; 
+    background-color: var(--bluegreen);
+    display: grid;
+    grid-template-rows: 100%;
+    grid-template-columns: 40% 30% 30%;
+    justify-content: space-around;
 }
 
-.bold {
-  background-color: white;
+.option {
+  margin-top: 20px;
+  height: 50%;
+  width: 50%;
+  border: 1px solid black;
+}
+
+.option:hover {
+  background-color: var(--empBlueGreen);
 }
 
 .Selected {
-  background-color: grey;
+  background-color: var(--empBlueGreen);;
+}
+
+.Selected:hover {
+  background-color: var(--bluegreen);
+}
+
+.charOptions {  
+  margin: 10px;
+  display: flex;
+  grid-column: 1 / 2;
+  height: 100%;
+  justify-content: center;
+}
+
+.fontOption {
+  margin: 10px;
+  display: flex;
+  grid-column: 2 / 3;
+  height: 50%;
+  justify-content: center;
+}
+
+.font {
+  background-color: var(--lightBlue);
+}
+
+.fontSize {
+  width: 10%;
+  background-color: var(--lightBlue);
+}
+
+.fontColor {
+  background-color: var(--lightBlue);
+}
+
+.box {
+  margin: 0;
+  width: 15%;
+  height: 40%
+}
+
+
+
+.paragraphOptions {
+  margin: 10px;
+  display: flex;
+  grid-column: 3 / 4;
+  height: 100%;
+  justify-content: center;
 }
