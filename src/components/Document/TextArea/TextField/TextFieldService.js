@@ -9,13 +9,18 @@ export {
 }
 
 function handleEnter(cursorPosition, setCursorPosition, letterCount, setLetterCount, handleWordInput, value, setValue, createLetter) {
-    const letterComp = (
-        <Letter 
-            className={"lineBreak"}
-            value={""}
-            letterCount={letterCount} 
-        />
-    )
+    // const letterComp = (
+    //     <Letter 
+    //         className={"lineBreak"}
+    //         value={""}
+    //         letterCount={letterCount} 
+    //     />
+    // )
+    const letterComp = {
+        className: "lineBreak",
+        value: "",
+        letterCount: letterCount
+    }
 
     let i = cursorPosition - 1;
     let lastChar = value[i].props.value;
@@ -87,7 +92,6 @@ function handleOpenBracket(openBracket, value, setValue, cursorPosition, setCurs
 function handleWordInput(value, setValue, cursorPosition) {
     const lastLetter = value[cursorPosition];
     if (lastLetter) {
-        // console.log(lastLetter.props ? lastLetter.props.value : lastLetter)
         // last letter was a space, new line, tab
         if  (lastLetter.props && 
             ((lastLetter.props.value && lastLetter.props.value.props) || 
@@ -96,11 +100,9 @@ function handleWordInput(value, setValue, cursorPosition) {
         { 
             let i = cursorPosition - 1;
             let lastWord = "";
-            console.log(value[i])
             while   (i >= 0 && value[i].props && 
                     (!value[i].props.value.props && value[i].props.className !== "lineBreak") &&
                     (value[i].length !== 4)) {
-                // console.log(value[i])
                 lastWord += value[i].props.value;
                 i--;
             }
@@ -124,14 +126,20 @@ function identifyKeywords(value, setValue, lastWord, cursorPosition) {
     const wordLength = lastWord.length;
     const newValue = value.map((val, index) => {
         if (index > (cursorPosition - wordLength - 1) && index < cursorPosition) {
-            return (
-                <Letter 
-                    className={val.props.className + " " + className}
-                    value={val.props.value}
-                    letterCount={val.props.letterCount} 
-                    letterClicked={val.props.letterClicked}
-                />
-            )
+            // return (
+            //     <Letter 
+            //         className={val.props.className + " " + className}
+            //         value={val.props.value}
+            //         letterCount={val.props.letterCount} 
+            //         letterClicked={val.props.letterClicked}
+            //     />
+            // )
+            return {
+                className: val.props.className + " " + className,
+                value: val.props.value,
+                letterCount: val.props.letterCount,
+                letterClicked: val.props.letterClicked
+            }
         } else {
             return val;
         }

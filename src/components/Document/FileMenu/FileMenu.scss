@@ -5,3 +5,43 @@
     height: 100%;
     background-color: blue;
 }
+
+.menuItemBlock {
+    width: 100%;
+    padding: 1em 0;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    position: relative;
+    cursor: pointer;
+}
+
+.fileNameInput {
+    padding: 0;
+    border: 0;
+    background-color: blue;
+    outline-width: 0;
+    border-right: 1px solid black;
+    border-left: 1px solid black;
+    font-size: 20px;
+    width: 90%;
+}
+
+.saveIcon {
+    position: absolute;
+    right: 15px;
+    border: 1px solid black;
+}
+
+#uploadFile {
+    opacity: 0;
+    position: absolute;
+    z-index: -1;
+}
+
+#uploadFileLabel {
+    width: 100%;
+    // height: 100%;
+    display: block;
+    
+}
