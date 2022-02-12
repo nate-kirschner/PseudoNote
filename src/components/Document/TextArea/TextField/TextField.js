@@ -1,16 +1,30 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Letter from './Letter/Letter';
 import { handleWordInput, handleOpenBracket, handleArrowDown, handleArrowUp, handleEnter } from './TextFieldService';
 
 import './TextField.scss';
 
-export default function TextField({ mode, top, left }) {
+export default function TextField({ top, left, textBoxes, setTextBoxes }) {
 
     const [value, setValue] = useState([]);
     const [cursorPosition, setCursorPosition] = useState(0);
     const [letterCount, setLetterCount] = useState(0);
     
     const inputRef = useRef(null);
+
+    useEffect(() => {
+        setValue(textBoxes[top + left].value)
+    }, [top, left])
+
+    useEffect(() => {
+        setTextBoxes({
+            ...textBoxes,
+            [top + left]: {
+                ...textBoxes[top + left],
+                value: value
+            }
+        })
+    }, [value])
 
     const letterClicked = (letterNum) => {
         setCursorPosition(letterNum);
@@ -64,14 +78,21 @@ export default function TextField({ mode, top, left }) {
         setCursorPosition(cursorPosition + 1);
         setLetterCount(letterCount + 1);
 
-        return (
-            <Letter 
-                    className={""}
-                    value={newLetter}
-                    letterCount={letterCount} 
-                    letterClicked={letterClicked}
-            />
-        )
+        return {
+            className: "",
+            value: newLetter,
+            letterCount: letterCount,
+            letterClicked: letterClicked,
+        }
+
+        // return (
+        //     <Letter 
+        //             className={""}
+        //             value={newLetter}
+        //             letterCount={letterCount} 
+        //             letterClicked={letterClicked}
+        //     />
+        // )
     }
 
     const handleInput = (letter) => {
@@ -116,9 +137,35 @@ export default function TextField({ mode, top, left }) {
             // onKeyPress={(e) => handleKeyPress(e)}
             onKeyDown={(e) => handleKeyDown(e)}
         >
-            <span className="value">{value.slice(0, cursorPosition)}</span>
+            {/* <span className="value">{value.slice(0, cursorPosition)}</span>
             <input className="frontInput" type="text" ref={inputRef} onChange={(e) => handleInput(e.target.value)} value=""/>
-            <span className="value">{value.slice(cursorPosition, value.length)}</span>
+            <span className="value">{value.slice(cursorPosition, value.length)}</span> */}
+
+            <span className="value">
+                {
+                    value.slice(0, cursorPosition).map(letter => {
+                        return <Letter 
+                            className={letter.className}
+                            value={letter.value}
+                            letterCount={letter.letterCount}
+                            letterClicked={letter.letterClicked}
+                        />
+                    })
+                }
+            </span>
+            <input className="frontInput" type="text" ref={inputRef} onChange={(e) => handleInput(e.target.value)} value=""/>
+            <span className="value">
+                {
+                    value.slice(cursorPosition, value.length).map(letter => {
+                        return <Letter 
+                            className={letter.className}
+                            value={letter.value}
+                            letterCount={letter.letterCount}
+                            letterClicked={letter.letterClicked || null}
+                        />
+                    })
+                }
+            </span>
 
         </div>
     )

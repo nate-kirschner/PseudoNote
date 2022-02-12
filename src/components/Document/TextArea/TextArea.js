@@ -3,10 +3,28 @@ import TextField from './TextField/TextField';
 
 import './TextArea.scss';
 
-export default function TextArea() {
+export default function TextArea({ name, textAreas, setTextAreas }) {
 
     const [textBoxes, setTextBoxes] = useState([]);
     const [textBoxPositions, setTextBoxPositions] = useState([]);
+
+    useEffect(() => {
+        if (textAreas[name]) {
+            setTextBoxes(textAreas[name].textBoxes || [])
+            setTextBoxPositions(textAreas[name].textBoxPositions || [])   
+        }
+    }, [name])
+
+    useEffect(() => {
+        setTextAreas({
+            ...textAreas,
+            [name]: {
+                ...textAreas[name],
+                textBoxes: textBoxes,
+                textBoxPositions: textBoxPositions
+            }
+        })
+    }, [name, textBoxes, textBoxPositions])
 
     const handleTextAreaClicked = (e) => {
         const top = e.clientY;
@@ -21,10 +39,15 @@ export default function TextArea() {
         })
         if (outsideTextBox) {
             setTextBoxPositions([...textBoxPositions, {top: top, left: left, width: 250, height: 300}])
-            setTextBoxes([
-                ...textBoxes, 
-                <TextField top={top} left={left} mode={"code"} />
-            ])
+            setTextBoxes({
+                ...textBoxes,
+                [(top + left)]: {
+                    value: [],
+                    top: top,
+                    left: left,
+                    mode: "code"
+                }
+            })
         }
     }
 
@@ -33,7 +56,9 @@ export default function TextArea() {
             onClick={(e) => handleTextAreaClicked(e)}
         >
             {
-                textBoxes
+                Object.values(textBoxes).map(box => {
+                    return <TextField top={box.top} left={box.left} textBoxes={textBoxes} setTextBoxes={setTextBoxes} />
+                })
             }
         </div>
     )
