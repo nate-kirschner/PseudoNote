@@ -1,0 +1,22 @@
+.textField {
+    width: 250px;
+    height: 300px;
+    border: 1px solid gray;
+    position: absolute;
+    text-align: left;
+}
+
+.value {
+    display: inline;
+    margin: 0;
+    font-size: 0px;
+}
+
+.frontInput {
+    border: none;
+    outline-width: 0;
+    display: inline;
+    margin: 0;
+    padding: 0;
+    width: 1px;
+}
