@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 import Letter from './Letter/Letter';
-import { handleCodeFormatting } from './TextFieldService';
+import { handleWordInput, handleOpenBracket, handleArrowDown, handleArrowUp, handleEnter } from './TextFieldService';
 
 import './TextField.scss';
 
@@ -12,26 +12,39 @@ export default function TextField({ mode, top, left }) {
     
     const inputRef = useRef(null);
 
-    useEffect(() => {
-        handleCodeFormatting.bind(this);
-    }, [])
-
     const letterClicked = (letterNum) => {
         setCursorPosition(letterNum);
     }
 
-    const handleKeyPress = (event) => {
+    const handleKeyDown = (event) => {
+        event.preventDefault();
         if (event.key === "ArrowLeft" || event.key === "Left") {
             setCursorPosition(cursorPosition - 1)
         } else if (event.key === "ArrowRight" || event.key === "Right") {
             setCursorPosition(cursorPosition + 1)
+        } else if (event.key === "ArrowUp") {
+            // does not work yet
+            handleArrowUp(value, cursorPosition, setCursorPosition)
+        } else if (event.key === "ArrowDown") {
+            // does not work yet
+            handleArrowDown(value, cursorPosition, setCursorPosition)
+        } else if (event.key === "Tab") {
+            handleInput("Tab")
         } else if (event.key === "Backspace" || event.key === "Delete") {
             let newValue = value;
             newValue.splice(cursorPosition - 1, 1);
             setValue(newValue);
             setCursorPosition(cursorPosition - 1)
-        } else {
-
+        } else if ("({[".includes(event.key)) {
+            handleOpenBracket(event.key, value, setValue, cursorPosition, setCursorPosition, handleInput);
+        } else if (
+                "abcdefghijklmnopqrstuvwxyz ".includes(event.key) || 
+                "?<>,.;:!@#$%^&*-=_+|~`'\"\\/)}]".includes(event.key) || 
+                "1234567890".includes(event.key)
+                ) {
+            handleInput(event.key)
+        } else if (event.key === "Enter") {
+            handleInput("Enter");
         }
 
         if (cursorPosition < 0) {
@@ -41,7 +54,7 @@ export default function TextField({ mode, top, left }) {
         }
     }
 
-    const handleInput = (letter) => {
+    const createLetter = (letter) => {
         let newLetter;
         if (letter === " ") {
             newLetter = <>&nbsp;</>
@@ -50,49 +63,48 @@ export default function TextField({ mode, top, left }) {
         }
         setCursorPosition(cursorPosition + 1);
         setLetterCount(letterCount + 1);
-        
-        setValue([
-            ...value.slice(0, cursorPosition), 
+
+        return (
             <Letter 
                     className={""}
                     value={newLetter}
                     letterCount={letterCount} 
                     letterClicked={letterClicked}
-            />, 
-            ...value.slice(cursorPosition, value.length)])
-
-        let className = "";
-        let numLetters = 0;
-        if (mode === "code") {
-            const formatting = handleCodeFormatting([...value], letter);
-            className = formatting.className;
-            numLetters = formatting.numLetters;
-            // console.log(className)
-            // console.log(numLetters)
-            if (className !== "") {
-                for (let i = value.length - 1 - numLetters; i < value.length - 1; i++) {
-                    console.log(className)
-                    console.log("value", value[i])
-                    if (value[i].props.value) {
-                        console.log("props")
-                        value[i] = (
-                            <Letter 
-                                className={value[i].props.value + className}
-                                value={value[i].props.value}
-                                letterCount={value[i].props.letterCount} 
-                                letterClicked={value[i].props.letterClicked}
-                            />
-                        )
-                    } else {
-                        console.log("no props")
-                    }
-                    
-                }
-            }
-        }
+            />
+        )
     }
 
-    const textFieldClicked = (e) => {
+    const handleInput = (letter) => {
+        let letterComp;
+        if (letter === "Tab") {
+            letterComp = [createLetter(" "), createLetter(" "), createLetter(" "), createLetter(" ")]
+            handleWordInput([
+                ...value.slice(0, cursorPosition), 
+                letterComp, 
+                ...value.slice(cursorPosition, value.length)
+            ], setValue, cursorPosition)
+        } else if (letter === "Enter") {
+            handleEnter(cursorPosition, setCursorPosition, letterCount, setLetterCount, handleWordInput, value, setValue, createLetter);
+        } else if (letter === "[]" || letter === "()" || letter === "{}") {
+            letterComp = [createLetter(letter[0]), createLetter(letter[1])];
+            // setCursorPosition(cursorPosition - 1);
+            handleWordInput([
+                ...value.slice(0, cursorPosition), 
+                ...letterComp, 
+                ...value.slice(cursorPosition, value.length)
+            ], setValue, cursorPosition)
+        } else {
+            letterComp = createLetter(letter)
+            handleWordInput([
+                ...value.slice(0, cursorPosition), 
+                letterComp, 
+                ...value.slice(cursorPosition, value.length)
+            ], setValue, cursorPosition)
+        }
+        
+    }
+
+    const textFieldClicked = () => {
         inputRef.current.focus();
     }
 
@@ -101,8 +113,8 @@ export default function TextField({ mode, top, left }) {
             className="textField"
             style={{ top: `${top}px`, left: `${left}px` }}
             onClick={(e) => textFieldClicked(e)}
-            onKeyPress={(e) => handleKeyPress(e)}
-            onKeyDown={(e) => handleKeyPress(e)}
+            // onKeyPress={(e) => handleKeyPress(e)}
+            onKeyDown={(e) => handleKeyDown(e)}
         >
             <span className="value">{value.slice(0, cursorPosition)}</span>
             <input className="frontInput" type="text" ref={inputRef} onChange={(e) => handleInput(e.target.value)} value=""/>
