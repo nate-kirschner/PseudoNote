@@ -1,11 +1,11 @@
 import { useRef } from 'react'
 import './Letter.scss'
 
-export default function Letter({ value, letterCount, letterClicked }) {
+export default function Letter({ className, value, letterCount, letterClicked }) {
 
     return (
         <div 
-            className="letter"
+            className={"letter " + className}
             onClick={() => letterClicked(letterCount)}
         >
             {value}

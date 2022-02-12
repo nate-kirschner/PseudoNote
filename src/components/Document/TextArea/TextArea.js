@@ -23,7 +23,7 @@ export default function TextArea() {
             setTextBoxPositions([...textBoxPositions, {top: top, left: left, width: 250, height: 300}])
             setTextBoxes([
                 ...textBoxes, 
-                <TextField top={top} left={left} />
+                <TextField top={top} left={left} mode={"code"} />
             ])
         }
     }
