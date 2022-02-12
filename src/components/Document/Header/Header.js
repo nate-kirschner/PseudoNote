@@ -15,7 +15,7 @@ export default function Header(props) {
         } else if (mode == 'text') {
             return <TextOptions setTextStyles={props.setTextStyles} textStyles={props.textStyles}/>    
         } else if (mode == 'code') {
-            return <CodeOptions/>
+            return <CodeOptions setCodeStyles={props.setCodeStyles} codeStyles={props.codeStyles}/>
         }
     }
 
