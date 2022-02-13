@@ -58,7 +58,7 @@ export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, s
     }
 
     return (
-        <div className={`fileMenu ${mode === "text" ? "fileMenuText" : "fileMenuCode"}`}>
+        <div className={`fileMenu ${mode=="text" ? "fileMenuText" : "fileMenuCode"}`}>
             <div className="logoDiv">
                 <img className="logo" src={logo} alt='logo'/>
             </div>
@@ -72,29 +72,29 @@ export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, s
 
                         {
                                 mode === "text" && (
-                                    <img src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/30/000000/external-add-file-folder-and-document-kmg-design-detailed-outline-kmg-design.png" alt="newDocumentText" />
+                                    <img src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/30/000000/external-add-file-folder-and-document-kmg-design-detailed-outline-kmg-design.png"/>
                                 )
                             }
                             {
                                 mode === "code" && (
-                                    <img src={newDoc_black} alt="newDocumentCode" />
+                                    <img src={newDoc_black} />
                                 )
                             }
                     </div>
                     <label 
-                        htmlFor="uploadFile" 
+                        for="uploadFile" 
                         className={"menuItemBlock uploadButton " + mode}
                         id="uploadFileLabel" 
                         onChange={(e) => uploadFile(e)} 
                         accept=".psn">
                             {
                                 mode === "text" && (
-                                    <img src="https://img.icons8.com/material-outlined/30/000000/upload--v1.png" alt="uploadText" />
+                                    <img src="https://img.icons8.com/material-outlined/30/000000/upload--v1.png"/>
                                 )
                             }
                             {
                                 mode === "code" && (
-                                    <img src={upload_black} alt="uploadCode" />
+                                    <img src={upload_black} />
                                 )
                             }
                             

@@ -1,5 +1,5 @@
 import './CodeOptions.scss';
-import React from 'react';
+import React, {useState} from 'react';
 
 
 export default function CodeOptions(props) {

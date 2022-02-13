@@ -1,5 +1,5 @@
 import './TextOptions.scss';
-import React, {useState} from 'react';
+import React, {useState, useRef} from 'react';
 
 
 /* <a href="https://icons8.com/icon/98153/align-left">Align Left icon by Icons8</a>
@@ -55,7 +55,7 @@ export default function TextOptions(props) {
                         props.setTextStyles({ ...props.textStyles, highlight: !props.textStyles.highlight })
                         setButtonSelect({...buttonSelect, highlight: !buttonSelect.highlight})
                         }}>  
-                    <img src="https://img.icons8.com/color/24/000000/marker-pen.png" alt='highlightIcon' />
+                    <img src="https://img.icons8.com/color/24/000000/marker-pen.png"/>
                 </div>
             </div>
             
@@ -103,21 +103,21 @@ export default function TextOptions(props) {
                 </div> */}
                 {/* Align Left Button */}
                 <div
-                    className={`option box alignLeft ${props.textStyles.alignText === 'left' ? "Selected" : ""}`} 
+                    className={`option box alignLeft ${props.textStyles.alignText == 'left' ? "Selected" : ""}`} 
                     onClick={() => {props.setTextStyles({...props.textStyles, alignText: "left"})}}> 
-                    <img src="https://img.icons8.com/material-outlined/24/000000/align-left.png" alt='alignIcon' />
+                    <img src="https://img.icons8.com/material-outlined/24/000000/align-left.png"/>
                 </div>
                 {/* Align Center Button */}
                 <div 
-                    className={`option box alignCenter ${props.textStyles.alignText === 'center' ? "Selected" : ""}`} 
+                    className={`option box alignCenter ${props.textStyles.alignText == 'center' ? "Selected" : ""}`} 
                     onClick={() => {props.setTextStyles({...props.textStyles, alignText: "center"})}}> 
-                    <img src="https://img.icons8.com/material-outlined/24/000000/align-center.png" alt='alignIcon' />    
+                    <img src="https://img.icons8.com/material-outlined/24/000000/align-center.png"/>    
                 </div> 
                 {/* Align Right Button */}
                 <div 
-                    className={`option box alignRight ${props.textStyles.alignText === "right" ? "Selected" : ""}`} 
+                    className={`option box alignRight ${props.textStyles.alignText == "right" ? "Selected" : ""}`} 
                     onClick={() => {props.setTextStyles({...props.textStyles, alignText: "right"})}}> 
-                    <img src="https://img.icons8.com/material-outlined/24/000000/align-right.png" alt='alignIcon' />
+                    <img src="https://img.icons8.com/material-outlined/24/000000/align-right.png"/>
                 </div>
             </div> 
             
