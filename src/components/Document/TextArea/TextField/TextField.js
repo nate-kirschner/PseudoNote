@@ -5,7 +5,7 @@ import Draggable from 'react-draggable';
 
 import './TextField.scss';
 
-export default function TextField({ num, top, left, textBoxes, setTextBoxes, setTextAreaMoving }) {
+export default function TextField({ num, top, left, textBoxes, setTextBoxes, setTextAreaMoving, textAreaRef }) {
 
     const [value, setValue] = useState([]);
     const [cursorPosition, setCursorPosition] = useState(0);
@@ -125,8 +125,10 @@ export default function TextField({ num, top, left, textBoxes, setTextBoxes, set
 
     const handleDrag = (e) => {
         setTextAreaMoving(true)
-        const newTop = e.clientY;
-        const newLeft = e.clientX;
+        const offsetLeft = textAreaRef.current.offsetLeft;
+        const offsetTop = textAreaRef.current.offsetTop;
+        const newTop = e.clientY - offsetTop;
+        const newLeft = e.clientX - offsetLeft;
         setTextBoxes({
             ...textBoxes,
             [num]: {

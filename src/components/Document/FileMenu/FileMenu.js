@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { save } from 'save-file';
 
 import './FileMenu.scss';
@@ -7,9 +7,13 @@ export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, s
 
     const [creatingNew, setCreatingNew] = useState(false);
     const [newFileName, setNewFileName] = useState("");
+
+    const inputRef = useRef(null);
  
     const generateNewTextArea = () => {
-        setCreatingNew(true)
+        setCreatingNew(true);
+        inputRef.current.focus();
+
     }
 
     const handleEnterPress = (e) => {
@@ -55,18 +59,17 @@ export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, s
                 accept=".psn"
             >Upload</label>
             <input type="file" id="uploadFile" onChange={(e) => uploadFile(e)}  />
-            {
-                creatingNew && (
-                    <div className="menuItemBlock">
-                        <input 
-                            className="fileNameInput"
-                            type="text" 
-                            onChange={(e) => setNewFileName(e.target.value)} 
-                            onKeyDown={(e) => handleEnterPress(e)}
-                        />
-                    </div>
-                )
-            }
+            
+            <div className={"menuItemBlock " + (creatingNew ? "visible" : "hidden")}>
+                <input 
+                    className="fileNameInput"
+                    ref={inputRef}
+                    type="text" 
+                    onChange={(e) => setNewFileName(e.target.value)} 
+                    onKeyDown={(e) => handleEnterPress(e)}
+                />
+            </div>
+                
             {
                 Object.keys(textAreas).map(name => {
                     return (
