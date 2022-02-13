@@ -41,9 +41,9 @@ export default function TextField({ num, top, left, textBoxes, setTextBoxes, set
         }
     }, [textStyles])
 
-    const letterClicked = (letterNum) => {
-        setCursorPosition(letterNum);
-    }
+    // const letterClicked = (letterNum) => {
+    //     setCursorPosition(letterNum);
+    // }
 
     const handleKeyDown = (event) => {
         event.preventDefault();
@@ -100,7 +100,6 @@ export default function TextField({ num, top, left, textBoxes, setTextBoxes, set
             className: className,
             value: newLetter,
             letterCount: letterCount,
-            letterClicked: letterClicked,
             letterStyle: textStyles,
         }
     }
@@ -187,7 +186,6 @@ export default function TextField({ num, top, left, textBoxes, setTextBoxes, set
                                 className={letter.className}
                                 value={letter.value}
                                 letterCount={letter.letterCount}
-                                letterClicked={letter.letterClicked}
                                 textStyles={textStyles}
                             />
                         })
@@ -201,7 +199,6 @@ export default function TextField({ num, top, left, textBoxes, setTextBoxes, set
                                 className={letter.className}
                                 value={letter.value}
                                 letterCount={letter.letterCount}
-                                letterClicked={letterClicked}
                                 textStyles={letter.letterStyle || textStyles}
                             />
                         })

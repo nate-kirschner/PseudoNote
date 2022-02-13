@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import './Letter.scss'
 
-export default function Letter({ className, value, letterCount, letterClicked, textStyles }) {
+export default function Letter({ className, value, letterCount, textStyles }) {
 
     const [style, setStyle] = useState({});
 
@@ -58,7 +58,7 @@ export default function Letter({ className, value, letterCount, letterClicked, t
         <div 
             className={"letter " + className}
             style={style}
-            onClick={() => letterClicked(letterCount)}
+            // onClick={() => letterClicked(letterCount)}
         >
             {value}
         </div>

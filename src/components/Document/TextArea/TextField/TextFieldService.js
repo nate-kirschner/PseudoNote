@@ -124,7 +124,7 @@ function identifyKeywords(value, setValue, lastWord, cursorPosition) {
                 className: val.className + " " + className,
                 value: val.value,
                 letterCount: val.letterCount,
-                letterClicked: val.letterClicked
+                letterStyle: val.letterStyle
             }
         } else {
             return val;

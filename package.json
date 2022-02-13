@@ -1,5 +1,6 @@
 {
   "name": "pseudonote",
+  "homepage": "https://nate-kirschner.github.io/PseudoNote",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
