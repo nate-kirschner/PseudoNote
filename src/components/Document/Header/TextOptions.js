@@ -70,7 +70,7 @@ export default function TextOptions(props) {
                 {/* Font Size Input Box */}
                 <input className='foptions fontSize' type="number" value={props.textStyles.fontSize} onChange={(value) => {props.setTextStyles({ ...props.textStyles, fontSize: value.target.value})}}/>
                 {/* Font Color Input Box */}
-                <select className='foptions fontColor' onChange={(value) => {props.setTextStyles({ ...props.textStyles, color: value.target.value})}}> 
+                <select className='foptions fontColor' onChange={(value) => {props.setTextStyles({ ...props.textStyles, fontColor: value.target.value})}}> 
                     <option value="black" >Black</option>
                     <option value="red">Red</option>
                     <option value="blue">Blue</option>

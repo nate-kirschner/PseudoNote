@@ -8,6 +8,7 @@
     background-color: var(--black);
     color: var(--white);
     box-shadow: 0 2px 30px black;
+    z-index: 999;
 }
 
 .fileMenuText {
@@ -62,6 +63,7 @@
 .uploadButton {
     width: 50%;
     margin: 0;
+    display: none;    
 }
 
 .fileNameInput {

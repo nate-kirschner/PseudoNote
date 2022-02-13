@@ -3,7 +3,7 @@ import TextField from './TextField/TextField';
 
 import './TextArea.scss';
 
-export default function TextArea({ name, textAreas, setTextAreas }) {
+export default function TextArea({ name, textAreas, setTextAreas, textStyles }) {
 
     const [textBoxes, setTextBoxes] = useState([]);
     const [textBoxPositions, setTextBoxPositions] = useState([]);
@@ -41,8 +41,8 @@ export default function TextArea({ name, textAreas, setTextAreas }) {
             textBoxPositions.forEach(box => {
                 outsideTextBox = 
                     outsideTextBox && 
-                    ((top < box.top || top > (box.top + box.height)) ||
-                    (left < box.left || left > (box.left + box.width)))
+                    ((top + 10 < box.top || top - 10 > (box.top + box.height)) ||
+                    (left + 10 < box.left || left - 10 > (box.left + box.width)))
             })
             if (outsideTextBox) {
                 setTextBoxPositions([...textBoxPositions, {top: (top), left: (left), width: 250, height: 300}])
@@ -58,27 +58,27 @@ export default function TextArea({ name, textAreas, setTextAreas }) {
                 })
             }
         }
-
-        
     }
 
     return (
         <div className="textArea"
             onClick={(e) => handleTextAreaClicked(e)}
             ref={textAreaRef}
-            // onClick={(e) => console.log("top", e.screenY, "left", e.screenX)}
         >
             {
                 Object.values(textBoxes).map(box => {
-                    return <TextField 
-                        num={box.num} 
-                        top={box.top} 
-                        left={box.left} 
-                        textBoxes={textBoxes} 
-                        setTextBoxes={setTextBoxes} 
-                        setTextAreaMoving={setTextAreaMoving} 
-                        textAreaRef={textAreaRef}
+                    return (
+                        <TextField 
+                            num={box.num} 
+                            top={box.top} 
+                            left={box.left} 
+                            textBoxes={textBoxes} 
+                            setTextBoxes={setTextBoxes} 
+                            setTextAreaMoving={setTextAreaMoving} 
+                            textAreaRef={textAreaRef}
+                            textStyles={textStyles}
                         />
+                    )
                 })
             }
         </div>

@@ -4,6 +4,11 @@
     font-size: 16px;
 }
 
+.space {
+    width: .5em;
+    display: inline-block;
+}
+
 .text {
     color: black;
 }
@@ -30,4 +35,20 @@
 
 .return {
     color: purple;
+}
+
+.let {
+    color: rgb(3, 3, 119);
+}
+
+.const {
+    color: rgb(3, 3, 119);
+}
+
+.true {
+    color: rgb(3, 3, 119);
+}
+
+.false {
+    color: rgb(3, 3, 119);
 }

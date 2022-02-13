@@ -6,7 +6,7 @@ import './FileMenu.scss';
 /* <a href="https://icons8.com/icon/UMe7Vqu3pLBX/add-file">Add File icon by Icons8</a> */
 /* <img src="https://img.icons8.com/material-outlined/24/000000/upload--v1.png"/> */
 
-export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, selectedTextArea, setSelectedTextArea, mode }) {
+export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, selectedTextArea, setSelectedTextArea, mode, setMode }) {
 
     const [creatingNew, setCreatingNew] = useState(false);
     const [newFileName, setNewFileName] = useState("");
@@ -15,14 +15,22 @@ export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, s
  
     const generateNewTextArea = () => {
         setCreatingNew(true);
-        inputRef.current.focus();
-
     }
+
+    useEffect(() => {
+        if (creatingNew) {
+            inputRef.current.focus();
+        } else {
+            setNewFileName("")
+        }
+    }, [creatingNew])
 
     const handleEnterPress = (e) => {
         if (e.key === "Enter") {
             createNewTextArea(newFileName)
             setCreatingNew(false)
+            setNewFileName("")
+            setMode("text")
         }
     }
 
@@ -72,6 +80,7 @@ export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, s
                     className="fileNameInput"
                     ref={inputRef}
                     type="text" 
+                    value={newFileName}
                     onChange={(e) => setNewFileName(e.target.value)} 
                     onKeyDown={(e) => handleEnterPress(e)}
                 />

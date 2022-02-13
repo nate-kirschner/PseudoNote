@@ -5,7 +5,7 @@ import Draggable from 'react-draggable';
 
 import './TextField.scss';
 
-export default function TextField({ num, top, left, textBoxes, setTextBoxes, setTextAreaMoving, textAreaRef }) {
+export default function TextField({ num, top, left, textBoxes, setTextBoxes, setTextAreaMoving, textAreaRef, textStyles }) {
 
     const [value, setValue] = useState([]);
     const [cursorPosition, setCursorPosition] = useState(0);
@@ -22,10 +22,24 @@ export default function TextField({ num, top, left, textBoxes, setTextBoxes, set
             ...textBoxes,
             [num]: {
                 ...textBoxes[num],
-                value: value
+                value: value,
             }
         })
     }, [value])
+
+    useEffect(() => {
+        console.log(textStyles)
+        if (textStyles.alignText) {
+            setTextBoxes({
+                ...textBoxes,
+                [num]: {
+                    ...textBoxes[num],
+                    value: value,
+                    style: { textAlign: `${textStyles.alignText}`}
+                }
+            })
+        }
+    }, [textStyles])
 
     const letterClicked = (letterNum) => {
         setCursorPosition(letterNum);
@@ -74,7 +88,7 @@ export default function TextField({ num, top, left, textBoxes, setTextBoxes, set
         let newLetter;
         let className = ""
         if (letter === " ") {
-            newLetter = <>&nbsp;</>;
+            newLetter = "";
             className = "space"
         } else {
             newLetter = letter
@@ -87,6 +101,7 @@ export default function TextField({ num, top, left, textBoxes, setTextBoxes, set
             value: newLetter,
             letterCount: letterCount,
             letterClicked: letterClicked,
+            letterStyle: textStyles,
         }
     }
 
@@ -139,6 +154,12 @@ export default function TextField({ num, top, left, textBoxes, setTextBoxes, set
         })
     }
 
+    const deleteTextBox = () => {
+        let deletedTextBoxes = { ...textBoxes };
+        delete deletedTextBoxes[num];
+        setTextBoxes(deletedTextBoxes)
+    }
+
     return (
         <Draggable
             handle=".handle"
@@ -148,11 +169,17 @@ export default function TextField({ num, top, left, textBoxes, setTextBoxes, set
         >
             <div 
                 className="textField"
-                style={{ top: `${top}px`, left: `${left}px` }}
+                style={{ top: `${top}px`, left: `${left}px`, ...textBoxes[num].style }}
                 onClick={(e) => textFieldClicked(e)}
                 onKeyDown={(e) => handleKeyDown(e)}
             >
-                <div className="handle" />
+                <div className="handle">
+                    <img 
+                        className="delete" 
+                        src="https://img.icons8.com/fluency-systems-regular/48/000000/filled-trash.png"
+                        onClick={() => deleteTextBox()}
+                    />
+                </div>
                 <span className="value">
                     {
                         value.slice(0, cursorPosition).map(letter => {
@@ -161,6 +188,7 @@ export default function TextField({ num, top, left, textBoxes, setTextBoxes, set
                                 value={letter.value}
                                 letterCount={letter.letterCount}
                                 letterClicked={letter.letterClicked}
+                                textStyles={textStyles}
                             />
                         })
                     }
@@ -173,7 +201,8 @@ export default function TextField({ num, top, left, textBoxes, setTextBoxes, set
                                 className={letter.className}
                                 value={letter.value}
                                 letterCount={letter.letterCount}
-                                letterClicked={letter.letterClicked || null}
+                                letterClicked={letterClicked}
+                                textStyles={letter.letterStyle || textStyles}
                             />
                         })
                     }
