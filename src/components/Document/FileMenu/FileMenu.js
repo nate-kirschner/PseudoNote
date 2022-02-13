@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import { save } from 'save-file';
-
+import logo from '../../../images/logo.png'
 import './FileMenu.scss';
 
 /* <a href="https://icons8.com/icon/UMe7Vqu3pLBX/add-file">Add File icon by Icons8</a> */
@@ -70,6 +70,7 @@ export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, s
                     onChange={(e) => uploadFile(e)} 
                     accept=".psn">
                         <img src="https://img.icons8.com/material-outlined/30/000000/upload--v1.png"/>
+                        <img src={logo} alt='logo'/>
                 </label>
                 <input type="file" id="uploadFile" onChange={(e) => uploadFile(e)}  />
                 </div>
