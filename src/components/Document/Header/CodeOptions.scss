@@ -7,6 +7,57 @@
     grid-column-end: 5;
     height: 100%;
     margin: 0;
-    color: var(--black);
-    background-color: var(--black)
+    color: var(--white);
+    background-color: var(--black);
+    display: grid;
+    grid-template-rows: 50% 50%;
+    grid-template-columns: 33% 34% 33%;
+    justify-content: center;
+    
+}
+.themeLabel {
+    grid-row: 1 / 2;
+    grid-column: 1 / 2;
+}
+
+.colorThemeDropdown {
+    width: max-content;
+    background-color: var(--empBlack);
+    color: var(--white);
+    grid-row: 2 / 2;
+    grid-column: 1 / 2;
+    justify-self: center;
+}
+    
+.fsizeLabel {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+}
+
+
+.fontSizeCode {
+    width: 30px;
+    background-color: var(--empBlack);
+    color: var(--white);
+    grid-row: 2 / 2;
+    grid-column: 2 / 3;
+    justify-self: center;
+}
+
+
+
+
+
+.flanguageLabel {
+    grid-row: 1 / 2;
+    grid-column: 3 / 4;
+}
+
+.languageDropdown {
+    width: max-content;
+    background-color: var(--empBlack);
+    color: var(--white);
+    grid-row: 2 / 2;
+    grid-column: 3 / 4;
+    justify-self: center;
 }

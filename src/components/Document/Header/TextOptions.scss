@@ -18,20 +18,17 @@
   margin-top: 20px;
   height: 50%;
   width: 50%;
-  border: 1px solid black;
+  border-radius: 20px;
 }
 
 .option:hover {
-  background-color: var(--empBlueGreen);
+  background-color: var(--empRed);
 }
 
 .Selected {
-  background-color: var(--empBlueGreen);;
+  background-color: var(--empRed);;
 }
 
-.Selected:hover {
-  background-color: var(--bluegreen);
-}
 
 .charOptions {  
   margin: 10px;
@@ -50,16 +47,23 @@
 }
 
 .font {
-  background-color: var(--lightBlue);
+  background-color: var(--empRed);
+  width: max-content;
 }
 
 .fontSize {
-  width: 10%;
-  background-color: var(--lightBlue);
+  width: 30px;
+  background-color: var(--empRed);
 }
 
 .fontColor {
-  background-color: var(--lightBlue);
+  background-color: var(--empRed);
+}
+
+.foptions {
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 10px;
 }
 
 .box {
