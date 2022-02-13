@@ -40,12 +40,8 @@
     cursor: pointer;
 
     &.hidden {
-        width: 0;
-        height: 0;
-        // background-color: red;
+        display: none;
     }
-
-    margin: 0;
     
 }
 

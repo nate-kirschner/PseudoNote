@@ -9,9 +9,6 @@ export default function CodeOptions(props) {
             <label for='html' className='label themeLabel'> Color Theme</label>
             <select className='boxCode colorThemeDropdown' onChange={(value) => {props.setCodeStyles({ ...props.codeStyles, colorTheme: value.target.value})}}> 
                 <option value="default" >Default</option>
-                <option value="SnazzyLight">Snazzy Light</option>
-                <option value="BluLoco Light">BluLoco Light</option>
-                <option value="Noctis">Noctis Light</option>
             </select>
             {/* Font Size Input */}
             <label for='html' className='label fsizeLabel'> Font Size</label>

@@ -71,8 +71,9 @@ export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, s
                     accept=".psn">
                         <img src="https://img.icons8.com/material-outlined/30/000000/upload--v1.png"/>
                 </label>
+                <input type="file" id="uploadFile" onChange={(e) => uploadFile(e)}  />
                 </div>
-            <input type="file" id="uploadFile" onChange={(e) => uploadFile(e)}  />
+            
             
             
             <div className={"menuItemBlock " + (creatingNew ? "visible" : "hidden")}>
