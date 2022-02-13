@@ -61,16 +61,16 @@ export default function TextOptions(props) {
             
             <div className='fontOption'>
                 {/* Font Dropdown Menu*/}         
-                <select className='font' onChange={(value) => {props.setTextStyles({ ...props.textStyles, font: value.target.value})}}> 
+                <select className='foptions font' onChange={(value) => {props.setTextStyles({ ...props.textStyles, font: value.target.value})}}> 
                     <option  value="Calibri">Calibri</option>
                     <option value="Times New Roman">Times New Roman</option>
                     <option value="Arial">Arial</option>
                     <option value="Arial">Comic Sans</option>
                 </select>
                 {/* Font Size Input Box */}
-                <input className='fontSize' type="number" onChange={(value) => {props.setTextStyles({ ...props.textStyles, fontSize: value.target.value})}}/>
+                <input className='foptions fontSize' type="number" value={props.textStyles.fontSize} onChange={(value) => {props.setTextStyles({ ...props.textStyles, fontSize: value.target.value})}}/>
                 {/* Font Color Input Box */}
-                <select className='fontColor' onChange={(value) => {props.setTextStyles({ ...props.textStyles, color: value.target.value})}}> 
+                <select className='foptions fontColor' onChange={(value) => {props.setTextStyles({ ...props.textStyles, color: value.target.value})}}> 
                     <option value="black" >Black</option>
                     <option value="red">Red</option>
                     <option value="blue">Blue</option>
