@@ -10,7 +10,7 @@ import { useEffect } from 'react';
 
 export default function Header(props) {
 
-    const [mode, setMode] = useState('start')
+    // const [mode, setMode] = useState('start')
     // console.log(mode)
     const optionView = () => {
         if(props.mode === 'start') {

@@ -15,6 +15,19 @@
     justify-content: center;
     
 }
+
+.label {
+    margin-top: 5px;
+}
+
+.boxCode {
+    background-color: var(--empBlack);
+    color: var(--white);
+    justify-self: center;
+    border-radius: 10px;
+    margin-bottom: 5px;
+}
+
 .themeLabel {
     grid-row: 1 / 2;
     grid-column: 1 / 2;
@@ -22,11 +35,8 @@
 
 .colorThemeDropdown {
     width: max-content;
-    background-color: var(--empBlack);
-    color: var(--white);
     grid-row: 2 / 2;
     grid-column: 1 / 2;
-    justify-self: center;
 }
     
 .fsizeLabel {

@@ -8,7 +8,6 @@
     background-color: var(--black);
     color: var(--white);
     box-shadow: 0 2px 30px black;
-    
 }
 
 .fileMenuText {
@@ -45,9 +44,24 @@
         // background-color: red;
     }
 
-    &.visible {
-        // background-color: blue;
-    }
+    margin: 0;
+    
+}
+
+.uploadContainer {
+    width: 100%;
+    display: flex;
+}
+
+.newDocumentButton {
+    width: 50%;
+    margin: 0;
+    border-right: 1px solid black;
+}
+
+.uploadButton {
+    width: 50%;
+    margin: 0;
 }
 
 .fileNameInput {
@@ -63,8 +77,13 @@
 
 .saveIcon {
     position: absolute;
-    right: 15px;
+    width: 10%;
+    left: 0px;
+    right: 0px;
     border: 1px solid black;
+    border-right: 1px solid var(--red);
+    background-color: var(--red);
+    bottom: 0;
 }
 
 #uploadFile {
