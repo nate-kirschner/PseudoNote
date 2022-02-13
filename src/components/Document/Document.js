@@ -30,6 +30,8 @@ export default function Document() {
     const [textAreas, setTextAreas] = useState({});
     const [selectedTextArea, setSelectedTextArea] = useState(null);
 
+    const [mode, setMode] = useState('start')
+
     const createNewTextArea = (name) => {
         const newTextArea = {
             order: Object.keys(textAreas).length,
@@ -49,13 +51,21 @@ export default function Document() {
 
     return (
         <div className="document">
-            <Header setTextStyles={setTextStyles} textStyles={textStyles} setCodeStyles={setCodeStyles} codeStyles={codeStyles}/>
+            <Header 
+                setTextStyles={setTextStyles} 
+                textStyles={textStyles} 
+                setCodeStyles={setCodeStyles} 
+                codeStyles={codeStyles}
+                mode={mode}
+                setMode={setMode}/>
             <FileMenu 
                 textAreas={textAreas} 
                 setTextAreas={setTextAreas}
                 createNewTextArea={createNewTextArea}
                 selectedTextArea={selectedTextArea} 
-                setSelectedTextArea={setSelectedTextArea} 
+                setSelectedTextArea={setSelectedTextArea}
+                mode={mode}
+                setMode={setMode} 
             />
             {
                 selectedTextArea && <TextArea name={selectedTextArea} textAreas={textAreas} setTextAreas={setTextAreas} />

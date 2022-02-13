@@ -9,6 +9,10 @@
     display: grid;
     grid-template-rows: 35% 65%;
     grid-template-columns: 25% 25% 25% 25%; 
+    &.Norm {
+        box-shadow: 0 2px 15px black;
+    }
+    color: var(--white)
     
 }
 
@@ -26,8 +30,13 @@
     font-family: 'Playfair', serif;
     font-size: 25px;
     color: var(--white);
-    background-color: var(--bluegreen);
+    background-color: var(--red);
+    &.Code {
+        background-color: var(--white);
+        color: var(--red)
+    }
 }
+
 
 .codeButton {
     grid-row-start: 1;
@@ -35,7 +44,11 @@
     grid-column-start: 3;
     grid-column-end: 5;
     font-size: 25px;
-    color: var(--black);
+    color: var(--white);
     font-family: 'FiraCode', monospace;
-    background-color: var(--lightBlue)
+    background-color: var(--black);
+    &.Text {
+        background-color: var(--white);
+        color: var(--black)
+    }
 }

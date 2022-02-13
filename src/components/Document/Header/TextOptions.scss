@@ -7,7 +7,7 @@
     grid-column-end: 5;
     height: 100%;
     margin: 0; 
-    background-color: var(--bluegreen);
+    background-color: var(--red);
     display: grid;
     grid-template-rows: 100%;
     grid-template-columns: 40% 30% 30%;
@@ -65,7 +65,8 @@
 .box {
   margin: 0;
   width: 15%;
-  height: 40%
+  height: 40%;
+  padding-top: 5px;
 }
 
 
