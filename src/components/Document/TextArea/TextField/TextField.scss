@@ -29,13 +29,14 @@
     background-color: gray;
     cursor: move;
     margin: 0;
+    position: relative;
 }
 
 .delete {
     width: 13px;
     height: 13px;
-    position: relative;
-    top: -2px;
+    position: absolute;
+    top: 0px;
     left: calc(100% - 20px);
     background-color: white;
     border-radius: 100%;
