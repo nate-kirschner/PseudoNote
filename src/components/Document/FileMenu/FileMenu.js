@@ -3,11 +3,11 @@ import { save } from 'save-file';
 
 import './FileMenu.scss';
 
-export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, selectedTextArea, setSelectedTextArea }) {
+export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, selectedTextArea, setSelectedTextArea, mode }) {
 
     const [creatingNew, setCreatingNew] = useState(false);
     const [newFileName, setNewFileName] = useState("");
-
+ 
     const generateNewTextArea = () => {
         setCreatingNew(true)
     }
@@ -41,7 +41,7 @@ export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, s
     }
 
     return (
-        <div className="fileMenu">
+        <div className={`fileMenu ${mode=="text" ? "fileMenuText" : "fileMenuCode"}`}>
             <div className="menuItemBlock newDocumentButton"
                 onClick={() => generateNewTextArea()}
             >
