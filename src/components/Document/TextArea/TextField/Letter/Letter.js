@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Letter.scss'
 
 export default function Letter({ className, value, letterCount, letterClicked, textStyles }) {

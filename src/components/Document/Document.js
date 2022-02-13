@@ -1,7 +1,7 @@
 import Header from './Header/Header';
 import FileMenu from './FileMenu/FileMenu';
 import TextArea from './TextArea/TextArea';
-import React, {useEffect, useState} from 'react';
+import React, { useState} from 'react';
 
 import './Document.scss';
 

@@ -3,7 +3,7 @@
 }
 
 html {
-  --black: #1d2325;
+  --black: black;
   --empBlack: #3f4c50;
   //--bluegreen: #177F75;
   --bluegreen: #2190b5;
@@ -13,5 +13,7 @@ html {
   --white: #FEFFFF;
   --red: #c44f55;
   --empRed: #d1757a;
+
+  overflow: hidden;
 
 }

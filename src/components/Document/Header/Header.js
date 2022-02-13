@@ -1,12 +1,6 @@
 import './Header.scss';
 import CodeOptions from './CodeOptions.js';
 import TextOptions from './TextOptions.js';
-import { useState } from 'react/cjs/react.development';
-import { useEffect } from 'react';
-{/* <style>
-@import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap');
-</style> */}
-
 
 export default function Header(props) {
 
@@ -23,9 +17,9 @@ export default function Header(props) {
     }
 
     return (
-        <div className={`header ${props.mode == "code" || props.mode === "text" ? "Norm" : ""}`}>
-            <div className={`textButton ${props.mode == "code" ? "Code" : ""}`} onClick={() => props.setMode("text")}> Text </div>
-            <div className={`codeButton ${props.mode == "text" ? "Text" : ""}`} onClick={() => props.setMode("code")}> Code </div> 
+        <div className={`header ${props.mode = "code" || props.mode === "text" ? "Norm" : ""}`}>
+            <div className={`textButton ${props.mode === "code" ? "Code" : ""}`} onClick={() => props.setMode("text")}> Text </div>
+            <div className={`codeButton ${props.mode === "text" ? "Text" : ""}`} onClick={() => props.setMode("code")}> Code </div> 
             {
                 optionView()
             }

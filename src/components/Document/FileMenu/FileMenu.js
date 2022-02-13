@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { save } from 'save-file';
-import logo from '../../../images/logo.png'
+import logo from '../../../images/logo.png';
+import upload_black from '../../../images/upload_black.png';
+import newDoc_black from '../../../images/newDoc_black.png';
 import './FileMenu.scss';
 
 /* <a href="https://icons8.com/icon/UMe7Vqu3pLBX/add-file">Add File icon by Icons8</a> */
@@ -56,25 +58,46 @@ export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, s
     }
 
     return (
-        <div className={`fileMenu ${mode=="text" ? "fileMenuText" : "fileMenuCode"}`}>
+        <div className={`fileMenu ${mode === "text" ? "fileMenuText" : "fileMenuCode"}`}>
             <div className="logoDiv">
                 <img className="logo" src={logo} alt='logo'/>
             </div>
             <div className="fileMenuContainer">
                 <div className="uploadContainer">
                     
-                    <div className="menuItemBlock newDocumentButton"
+                    <div className={"menuItemBlock newDocumentButton " + mode}
                         onClick={() => generateNewTextArea()}
                     >
-                        <img src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/30/000000/external-add-file-folder-and-document-kmg-design-detailed-outline-kmg-design.png"/>
+                        
+
+                        {
+                                mode === "text" && (
+                                    <img src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/30/000000/external-add-file-folder-and-document-kmg-design-detailed-outline-kmg-design.png" alt="newDocumentText" />
+                                )
+                            }
+                            {
+                                mode === "code" && (
+                                    <img src={newDoc_black} alt="newDocumentCode" />
+                                )
+                            }
                     </div>
                     <label 
-                        for="uploadFile" 
-                        className="menuItemBlock uploadButton"
+                        htmlFor="uploadFile" 
+                        className={"menuItemBlock uploadButton " + mode}
                         id="uploadFileLabel" 
                         onChange={(e) => uploadFile(e)} 
                         accept=".psn">
-                            <img src="https://img.icons8.com/material-outlined/30/000000/upload--v1.png"/>
+                            {
+                                mode === "text" && (
+                                    <img src="https://img.icons8.com/material-outlined/30/000000/upload--v1.png" alt="uploadText" />
+                                )
+                            }
+                            {
+                                mode === "code" && (
+                                    <img src={upload_black} alt="uploadCode" />
+                                )
+                            }
+                            
                     </label>
                     <input type="file" id="uploadFile" onChange={(e) => uploadFile(e)}  />
                     </div>

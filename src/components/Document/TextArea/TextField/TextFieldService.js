@@ -1,4 +1,3 @@
-import Letter from "./Letter/Letter";
 
 export {
     handleWordInput,
