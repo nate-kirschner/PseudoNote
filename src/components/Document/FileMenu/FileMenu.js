@@ -57,48 +57,53 @@ export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, s
 
     return (
         <div className={`fileMenu ${mode=="text" ? "fileMenuText" : "fileMenuCode"}`}>
-            <div className="uploadContainer">
-                <div className="menuItemBlock newDocumentButton"
-                    onClick={() => generateNewTextArea()}
-                >
-                    <img src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/30/000000/external-add-file-folder-and-document-kmg-design-detailed-outline-kmg-design.png"/>
-                </div>
-                <label 
-                    for="uploadFile" 
-                    className="menuItemBlock uploadButton"
-                    id="uploadFileLabel" 
-                    onChange={(e) => uploadFile(e)} 
-                    accept=".psn">
-                        <img src="https://img.icons8.com/material-outlined/30/000000/upload--v1.png"/>
-                        <img src={logo} alt='logo'/>
-                </label>
-                <input type="file" id="uploadFile" onChange={(e) => uploadFile(e)}  />
-                </div>
-            
-            
-            
-            <div className={"menuItemBlock " + (creatingNew ? "visible" : "hidden")}>
-                <input 
-                    className="fileNameInput"
-                    ref={inputRef}
-                    type="text" 
-                    value={newFileName}
-                    onChange={(e) => setNewFileName(e.target.value)} 
-                    onKeyDown={(e) => handleEnterPress(e)}
-                />
+            <div className="logoDiv">
+                <img className="logo" src={logo} alt='logo'/>
             </div>
+            <div className="fileMenuContainer">
+                <div className="uploadContainer">
+                    
+                    <div className="menuItemBlock newDocumentButton"
+                        onClick={() => generateNewTextArea()}
+                    >
+                        <img src="https://img.icons8.com/external-kmg-design-detailed-outline-kmg-design/30/000000/external-add-file-folder-and-document-kmg-design-detailed-outline-kmg-design.png"/>
+                    </div>
+                    <label 
+                        for="uploadFile" 
+                        className="menuItemBlock uploadButton"
+                        id="uploadFileLabel" 
+                        onChange={(e) => uploadFile(e)} 
+                        accept=".psn">
+                            <img src="https://img.icons8.com/material-outlined/30/000000/upload--v1.png"/>
+                    </label>
+                    <input type="file" id="uploadFile" onChange={(e) => uploadFile(e)}  />
+                    </div>
                 
-            {
-                Object.keys(textAreas).map(name => {
-                    return (
-                        <div className="menuItemBlock" onClick={() => setSelectedTextArea(name)}>
-                            {name}
-                            {/* <i className="saveIcon" onClick={() => saveFile(name)}>S</i> */}
-                        </div>
-                    )
-                })
-            }
-            <i className="saveIcon" onClick={() => saveFile(selectedTextArea)}>Save File</i>
+                
+                
+                <div className={"menuItemBlock " + (creatingNew ? "visible" : "hidden")}>
+                    <input 
+                        className="fileNameInput"
+                        ref={inputRef}
+                        type="text" 
+                        value={newFileName}
+                        onChange={(e) => setNewFileName(e.target.value)} 
+                        onKeyDown={(e) => handleEnterPress(e)}
+                    />
+                </div>
+                    
+                {
+                    Object.keys(textAreas).map(name => {
+                        return (
+                            <div className="menuItemBlock" onClick={() => setSelectedTextArea(name)}>
+                                {name}
+                                {/* <i className="saveIcon" onClick={() => saveFile(name)}>S</i> */}
+                            </div>
+                        )
+                    })
+                }
+                <i className="saveIcon" onClick={() => saveFile(selectedTextArea)}>Save File</i>
+            </div>
         </div>
     )
 }
