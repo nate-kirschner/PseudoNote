@@ -78,9 +78,10 @@ function handleOpenBracket(openBracket, value, setValue, cursorPosition, setCurs
 function handleWordInput(value, setValue, cursorPosition) {
     const lastLetter = value[cursorPosition];
     if (lastLetter) {
+        console.log(lastLetter)
         // last letter was a space, new line, tab
         if  (lastLetter && 
-            ((lastLetter.value && lastLetter.className === "space") || 
+            ((lastLetter.className === "space") || 
             (lastLetter.className === "lineBreak") ||
             (lastLetter.length === 4)))
         { 
@@ -138,5 +139,9 @@ const keywords = {
     if: "if",
     else: "else",
     function: "function",
-    return: "return"
+    return: "return",
+    let: "let",
+    const: "const",
+    true: "true",
+    false: "false",
 }

@@ -3,15 +3,13 @@ import CodeOptions from './CodeOptions.js';
 import TextOptions from './TextOptions.js';
 import { useState } from 'react/cjs/react.development';
 import { useEffect } from 'react';
-<style>
+{/* <style>
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code:wght@500&display=swap');
-</style>
+</style> */}
 
 
 export default function Header(props) {
 
-    const [mode, setMode] = useState('start')
-    // console.log(mode)
     const optionView = () => {
         if(props.mode === 'start') {
             return null;

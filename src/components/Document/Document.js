@@ -14,8 +14,8 @@ export default function Document() {
         underline: false,
         highlight: false,
         font: "Calibri",
-        fontSize: 11,
-        fontColor: 'Black',
+        fontSize: 18,
+        fontColor: 'black',
         bulletPoints: false,
         numberList: false,
         alignText: "left"
@@ -23,14 +23,14 @@ export default function Document() {
 
     const [codeStyles, setCodeStyles] = useState({
         colorTheme: "Default",
-        fontSize: 12,
+        fontSize: 14,
         language: "JavaScript"
     })
 
     const [textAreas, setTextAreas] = useState({});
     const [selectedTextArea, setSelectedTextArea] = useState(null);
 
-    const [mode, setMode] = useState('start')
+    const [mode, setMode] = useState('text')
 
     const createNewTextArea = (name) => {
         const newTextArea = {
@@ -64,7 +64,14 @@ export default function Document() {
                 setMode={setMode} 
             />
             {
-                selectedTextArea && <TextArea name={selectedTextArea} textAreas={textAreas} setTextAreas={setTextAreas} />
+                selectedTextArea && 
+                    <TextArea 
+                        name={selectedTextArea} 
+                        textAreas={textAreas} 
+                        setTextAreas={setTextAreas} 
+                        mode={mode} 
+                        textStyles={(mode === 'text') ? textStyles : codeStyles}
+                    />
             }
         </div>
     )

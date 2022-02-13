@@ -12,8 +12,8 @@
     &.Norm {
         box-shadow: 0 2px 15px black;
     }
-    color: var(--white)
-    
+    color: var(--white);
+    z-index: 999;
 }
 
 .start {

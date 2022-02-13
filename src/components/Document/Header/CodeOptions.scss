@@ -18,6 +18,7 @@
 .themeLabel {
     grid-row: 1 / 2;
     grid-column: 1 / 2;
+    margin-top: 5px;
 }
 
 .colorThemeDropdown {
@@ -27,11 +28,13 @@
     grid-row: 2 / 2;
     grid-column: 1 / 2;
     justify-self: center;
+    margin-bottom: 5px;
 }
     
 .fsizeLabel {
     grid-row: 1 / 2;
     grid-column: 2 / 3;
+    margin-top: 5px;
 }
 
 
@@ -42,15 +45,13 @@
     grid-row: 2 / 2;
     grid-column: 2 / 3;
     justify-self: center;
+    margin-bottom: 5px;
 }
-
-
-
-
 
 .flanguageLabel {
     grid-row: 1 / 2;
     grid-column: 3 / 4;
+    margin-top: 5px;
 }
 
 .languageDropdown {
@@ -60,4 +61,5 @@
     grid-row: 2 / 2;
     grid-column: 3 / 4;
     justify-self: center;
+    margin-bottom: 5px;
 }
