@@ -43,10 +43,6 @@ export default function Document() {
         setSelectedTextArea(name)
     }
 
-    useEffect(() => {
-        console.log(textAreas)
-    }, [textAreas])
-
     return (
         <div className="document">
             <Header setTextStyles={setTextStyles} textStyles={textStyles} setCodeStyles={setCodeStyles} codeStyles={codeStyles}/>

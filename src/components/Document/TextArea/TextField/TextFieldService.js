@@ -9,13 +9,6 @@ export {
 }
 
 function handleEnter(cursorPosition, setCursorPosition, letterCount, setLetterCount, handleWordInput, value, setValue, createLetter) {
-    // const letterComp = (
-    //     <Letter 
-    //         className={"lineBreak"}
-    //         value={""}
-    //         letterCount={letterCount} 
-    //     />
-    // )
     const letterComp = {
         className: "lineBreak",
         value: "",
@@ -23,10 +16,10 @@ function handleEnter(cursorPosition, setCursorPosition, letterCount, setLetterCo
     }
 
     let i = cursorPosition - 1;
-    let lastChar = value[i].props.value;
-    while (i > 0 && value[i].props.value.props) {
+    let lastChar = value[i].value;
+    while (i > 0 && value[i].className === "space") {
         i--;
-        lastChar = value[i].props.value;
+        lastChar = value[i].value;
     }
     setLetterCount(letterCount + 1);
 
@@ -47,13 +40,6 @@ function handleEnter(cursorPosition, setCursorPosition, letterCount, setLetterCo
         ], setValue, cursorPosition)
         setCursorPosition(cursorPosition + 2);
     }
-    
-
-
-    // if ("({[".includes(lastChar)) {
-    //     handleInput("Tab")
-    // }
-
 }
 
 function handleArrowUp(value, cursorPosition, setCursorPosition) {
@@ -93,17 +79,17 @@ function handleWordInput(value, setValue, cursorPosition) {
     const lastLetter = value[cursorPosition];
     if (lastLetter) {
         // last letter was a space, new line, tab
-        if  (lastLetter.props && 
-            ((lastLetter.props.value && lastLetter.props.value.props) || 
-            (lastLetter.props.className === "lineBreak") ||
+        if  (lastLetter && 
+            ((lastLetter.value && lastLetter.className === "space") || 
+            (lastLetter.className === "lineBreak") ||
             (lastLetter.length === 4)))
         { 
             let i = cursorPosition - 1;
             let lastWord = "";
-            while   (i >= 0 && value[i].props && 
-                    (!value[i].props.value.props && value[i].props.className !== "lineBreak") &&
+            while   (i >= 0 && value[i] && 
+                    (value[i].className !== "space" && value[i].className !== "lineBreak") &&
                     (value[i].length !== 4)) {
-                lastWord += value[i].props.value;
+                lastWord += value[i].value;
                 i--;
             }
             lastWord = lastWord.split("").reverse().join("");
@@ -135,10 +121,10 @@ function identifyKeywords(value, setValue, lastWord, cursorPosition) {
             //     />
             // )
             return {
-                className: val.props.className + " " + className,
-                value: val.props.value,
-                letterCount: val.props.letterCount,
-                letterClicked: val.props.letterClicked
+                className: val.className + " " + className,
+                value: val.value,
+                letterCount: val.letterCount,
+                letterClicked: val.letterClicked
             }
         } else {
             return val;

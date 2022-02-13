@@ -29,7 +29,6 @@ export default function FileMenu({ textAreas, setTextAreas, createNewTextArea, s
         const fileName = event.target.files[0].name;
         reader.onload = async (e) => { 
             const text = (e.target.result)
-            console.log(e)
             setTextAreas({
                 ...textAreas,
                 [fileName]: {

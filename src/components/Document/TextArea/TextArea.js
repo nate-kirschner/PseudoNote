@@ -8,6 +8,8 @@ export default function TextArea({ name, textAreas, setTextAreas }) {
     const [textBoxes, setTextBoxes] = useState([]);
     const [textBoxPositions, setTextBoxPositions] = useState([]);
 
+    const [textAreaMoving, setTextAreaMoving] = useState(false);
+
     useEffect(() => {
         if (textAreas[name]) {
             setTextBoxes(textAreas[name].textBoxes || [])
@@ -30,25 +32,30 @@ export default function TextArea({ name, textAreas, setTextAreas }) {
         const top = e.clientY;
         const left = e.clientX;
 
-        let outsideTextBox = true;
-        textBoxPositions.forEach(box => {
-            outsideTextBox = 
-                outsideTextBox && 
-                ((top < box.top || top > (box.top + box.height)) ||
-                (left < box.left || left > (box.left + box.width)))
-        })
-        if (outsideTextBox) {
-            setTextBoxPositions([...textBoxPositions, {top: top, left: left, width: 250, height: 300}])
-            setTextBoxes({
-                ...textBoxes,
-                [(top + left)]: {
-                    value: [],
-                    top: top,
-                    left: left,
-                    mode: "code"
-                }
+        if (!textAreaMoving) {
+            let outsideTextBox = true;
+            textBoxPositions.forEach(box => {
+                outsideTextBox = 
+                    outsideTextBox && 
+                    ((top < box.top || top > (box.top + box.height)) ||
+                    (left < box.left || left > (box.left + box.width)))
             })
+            if (outsideTextBox) {
+                setTextBoxPositions([...textBoxPositions, {top: top, left: left, width: 250, height: 300}])
+                setTextBoxes({
+                    ...textBoxes,
+                    [Object.keys(textBoxes).length]: {
+                        num: Object.keys(textBoxes).length,
+                        value: [],
+                        top: top,
+                        left: left,
+                        mode: "code"
+                    }
+                })
+            }
         }
+
+        
     }
 
     return (
@@ -57,7 +64,7 @@ export default function TextArea({ name, textAreas, setTextAreas }) {
         >
             {
                 Object.values(textBoxes).map(box => {
-                    return <TextField top={box.top} left={box.left} textBoxes={textBoxes} setTextBoxes={setTextBoxes} />
+                    return <TextField num={box.num} top={box.top} left={box.left} textBoxes={textBoxes} setTextBoxes={setTextBoxes} setTextAreaMoving={setTextAreaMoving} />
                 })
             }
         </div>

@@ -1,10 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 import Letter from './Letter/Letter';
 import { handleWordInput, handleOpenBracket, handleArrowDown, handleArrowUp, handleEnter } from './TextFieldService';
+import Draggable from 'react-draggable';
 
 import './TextField.scss';
 
-export default function TextField({ top, left, textBoxes, setTextBoxes }) {
+export default function TextField({ num, top, left, textBoxes, setTextBoxes, setTextAreaMoving }) {
 
     const [value, setValue] = useState([]);
     const [cursorPosition, setCursorPosition] = useState(0);
@@ -13,14 +14,14 @@ export default function TextField({ top, left, textBoxes, setTextBoxes }) {
     const inputRef = useRef(null);
 
     useEffect(() => {
-        setValue(textBoxes[top + left].value)
-    }, [top, left])
+        setValue(textBoxes[num].value)
+    }, [num])
 
     useEffect(() => {
         setTextBoxes({
             ...textBoxes,
-            [top + left]: {
-                ...textBoxes[top + left],
+            [num]: {
+                ...textBoxes[num],
                 value: value
             }
         })
@@ -53,6 +54,7 @@ export default function TextField({ top, left, textBoxes, setTextBoxes }) {
             handleOpenBracket(event.key, value, setValue, cursorPosition, setCursorPosition, handleInput);
         } else if (
                 "abcdefghijklmnopqrstuvwxyz ".includes(event.key) || 
+                "ABCDEFGHIJKLMNOPQRSTUVWXYZ".includes(event.key) || 
                 "?<>,.;:!@#$%^&*-=_+|~`'\"\\/)}]".includes(event.key) || 
                 "1234567890".includes(event.key)
                 ) {
@@ -70,8 +72,10 @@ export default function TextField({ top, left, textBoxes, setTextBoxes }) {
 
     const createLetter = (letter) => {
         let newLetter;
+        let className = ""
         if (letter === " ") {
-            newLetter = <>&nbsp;</>
+            newLetter = <>&nbsp;</>;
+            className = "space"
         } else {
             newLetter = letter
         }
@@ -79,36 +83,26 @@ export default function TextField({ top, left, textBoxes, setTextBoxes }) {
         setLetterCount(letterCount + 1);
 
         return {
-            className: "",
+            className: className,
             value: newLetter,
             letterCount: letterCount,
             letterClicked: letterClicked,
         }
-
-        // return (
-        //     <Letter 
-        //             className={""}
-        //             value={newLetter}
-        //             letterCount={letterCount} 
-        //             letterClicked={letterClicked}
-        //     />
-        // )
     }
 
     const handleInput = (letter) => {
         let letterComp;
         if (letter === "Tab") {
-            letterComp = [createLetter(" "), createLetter(" "), createLetter(" "), createLetter(" ")]
             handleWordInput([
                 ...value.slice(0, cursorPosition), 
-                letterComp, 
+                createLetter(" "), createLetter(" "), createLetter(" "), createLetter(" "),
                 ...value.slice(cursorPosition, value.length)
             ], setValue, cursorPosition)
+            setCursorPosition(cursorPosition + 4)
         } else if (letter === "Enter") {
             handleEnter(cursorPosition, setCursorPosition, letterCount, setLetterCount, handleWordInput, value, setValue, createLetter);
         } else if (letter === "[]" || letter === "()" || letter === "{}") {
             letterComp = [createLetter(letter[0]), createLetter(letter[1])];
-            // setCursorPosition(cursorPosition - 1);
             handleWordInput([
                 ...value.slice(0, cursorPosition), 
                 ...letterComp, 
@@ -129,44 +123,61 @@ export default function TextField({ top, left, textBoxes, setTextBoxes }) {
         inputRef.current.focus();
     }
 
+    const handleDrag = (e) => {
+        setTextAreaMoving(true)
+        const newTop = e.clientY;
+        const newLeft = e.clientX;
+        setTextBoxes({
+            ...textBoxes,
+            [num]: {
+                ...textBoxes[num],
+                top: newTop,
+                left: newLeft,
+            }
+        })
+    }
+
     return (
-        <div 
-            className="textField"
-            style={{ top: `${top}px`, left: `${left}px` }}
-            onClick={(e) => textFieldClicked(e)}
-            // onKeyPress={(e) => handleKeyPress(e)}
-            onKeyDown={(e) => handleKeyDown(e)}
+        <Draggable
+            handle=".handle"
+            bounds="parent"
+            onDrag={(e) => handleDrag(e)}
+            onStop={() => setTimeout(() => setTextAreaMoving(false), 10)}
         >
-            {/* <span className="value">{value.slice(0, cursorPosition)}</span>
-            <input className="frontInput" type="text" ref={inputRef} onChange={(e) => handleInput(e.target.value)} value=""/>
-            <span className="value">{value.slice(cursorPosition, value.length)}</span> */}
+            <div 
+                className="textField"
+                style={{ top: `${top}px`, left: `${left}px` }}
+                onClick={(e) => textFieldClicked(e)}
+                onKeyDown={(e) => handleKeyDown(e)}
+            >
+                <div className="handle" />
+                <span className="value">
+                    {
+                        value.slice(0, cursorPosition).map(letter => {
+                            return <Letter 
+                                className={letter.className}
+                                value={letter.value}
+                                letterCount={letter.letterCount}
+                                letterClicked={letter.letterClicked}
+                            />
+                        })
+                    }
+                </span>
+                <input className="frontInput" type="text" ref={inputRef} onChange={(e) => handleInput(e.target.value)} value=""/>
+                <span className="value">
+                    {
+                        value.slice(cursorPosition, value.length).map(letter => {
+                            return <Letter 
+                                className={letter.className}
+                                value={letter.value}
+                                letterCount={letter.letterCount}
+                                letterClicked={letter.letterClicked || null}
+                            />
+                        })
+                    }
+                </span>
 
-            <span className="value">
-                {
-                    value.slice(0, cursorPosition).map(letter => {
-                        return <Letter 
-                            className={letter.className}
-                            value={letter.value}
-                            letterCount={letter.letterCount}
-                            letterClicked={letter.letterClicked}
-                        />
-                    })
-                }
-            </span>
-            <input className="frontInput" type="text" ref={inputRef} onChange={(e) => handleInput(e.target.value)} value=""/>
-            <span className="value">
-                {
-                    value.slice(cursorPosition, value.length).map(letter => {
-                        return <Letter 
-                            className={letter.className}
-                            value={letter.value}
-                            letterCount={letter.letterCount}
-                            letterClicked={letter.letterClicked || null}
-                        />
-                    })
-                }
-            </span>
-
-        </div>
+            </div>
+        </Draggable>
     )
 }

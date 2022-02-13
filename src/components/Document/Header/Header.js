@@ -10,7 +10,7 @@ import { useState } from 'react/cjs/react.development';
 export default function Header(props) {
 
     const [mode, setMode] = useState('start')
-    console.log(mode)
+    // console.log(mode)
     const optionView = () => {
         if(mode == 'start') {
             return <div className='start'/>
