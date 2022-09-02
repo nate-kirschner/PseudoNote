@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+## PseudoNote - 2022 HackBeanpot
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Team Members
+Nathan Kirschner, Rishi Agarwal
 
-## Available Scripts
+### Inspiration
+Last year, we were sitting in our Fundies 2 class taking notes on the various design patterns. Our professor would use OneNote to draw out his code snippets but when we would write these down in the OneNote text boxes, they did not have any of the conventional code formatting that we would expect when writing code in an IDE. So when we would look back our notes it would be very difficult to interpret given the lack of formatting. Thus, we had idea for PseudoNote.
 
-In the project directory, you can run:
+### What it does
+PsuedoNote allows users to transition seamlessly between text formatting and code formatting in a text area. The text formatting allows for bold, italicizing, underlining and highlighting words along with changing the font, font size, font color, and alignment of the text. Currently the code formatting provides a general code format that replicates what is seen in any popular IDE. In addition users can save files with a custom .psn extension, upload files of the same extension, and create and view multiple files in a singular window.
 
-### `npm start`
+### How we built it
+The app was built with ReactJs and hosted on GitHub. The website is split into three components, a header, a file menu, and the text area. The header controls the formatting and allows the user to switch between 'code' and 'text' mode. The file menu lets the user choose which file to display and handles importing and exporting. The text area displays text boxes which the user can create, rearrange, and edit.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Challenges we ran into
+The text boxes were particularly tricky to implement since they needed to handle a large amount of functionality. We were able to overcome this by experimenting with a number of attempts to find a working solution. Another challenge we faced was the limited time we had. Since there were only two of us on the team, we each had to code a large chunk of the project in a short amount of time.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Accomplishments that we're proud of
+One accomplishment we are proud of is the large amount of functionality we were able to implement in a short amount of time. We were able to provide a number of formatting features in the text boxes, as well as importing and exporting files, which allows the website to be usable as a text editor. We are also proud to provide a finished product before the end of the hackathon. We spent a lot of time this weekend making this and are happy with the result.
 
-### `npm test`
+### What we learned
+We learned a lot about ReactJs and web development. We also learned about the challenges of working under a short time constraint and were able to develop skills to overcome the challenge.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### What's next for PseudoNote
+We have a number of formatting styles and functionalities that we want to add to make PseudoNote a more complete text editor. These include additional code color schemes, languages, inserting tables, lists, and others. We also want to provide PseudoNote as a desktop application to accompany the existing website.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+More information and demos can be found at [https://devpost.com/software/pseudonote-q56bih] <br>
+PseudoNote is available at [https://nate-kirschner.github.io/PseudoNote]
